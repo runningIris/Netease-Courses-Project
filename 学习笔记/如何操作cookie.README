@@ -1,0 +1,56 @@
+1. cookie简介
+	因为HTTP协议是无状态协议，所以用cookie来保存某个用户的识别信息。
+	是一种WEB服务器通过浏览器在访问者的硬盘上存储信息是手段。
+	体积很小的纯文本
+2. cookie的属性
+	expires: cookie的生存期。
+		默认情况下是暂时的，浏览器关闭就失效。
+	path: 指定与cookie关联在一起的网页。
+		默认是在和当前网页同一目录有效。
+		可以设置为'/'，那么它对该网站的所有网页都可见
+	domain： 设定cookie有效的域名。
+		如果把path设置为'/'，把domain设为'.sohu.com', 那么 A.sohu.com和B.sohu.com 的所有网站都能访问此cookie。
+	secure: 布尔值，指定网络上如何传输cookie。
+		默认情况下是不安全的，可以通过一个不安全的，普通的HTTP协议传输；
+		若设置cookie为安全的，那么它将只在浏览器和服务器通过HTTPS或其他的安全协议连接在一起时才被传输。
+3. cookie的操作
+	可以通过JavaScript或者JSP来操作
+	JavaScript：
+		<script language='javascript'>  
+			//设置cookie, cookie有效期为GMT时间
+			//180天有效期
+			setCookie('password', '12345', (3600000 * 24 *180)); 
+			function setCookie(name, value, expires){
+				var expdate = new Date();
+				expdate.setTime(expdate.getTime() + expires);
+				document.cookie = name + '=' + encodeURI(value) + '; expires=' + expires.toGMTString() + '; path=/';
+			}
+			//根据cookie名，取得cookie值
+			function getCookie(name){
+				var search;
+				search = name + '=';
+				offset = document.cookie.indexOf(search);
+				if(offset != -1){
+					offset += search.length;
+					end = document.cookie.indexOf(';', offset);
+					if(end == -1){
+						end = document.cookie.length;
+						return unescape(document.cookie.substring(offset, end));
+					} else return '';
+				}
+			}
+			//删除某一cookie 
+			function deleteCookie(name){
+				var expdate = new Date(); 
+				expdate.setTime(expdate.getTime() - (3600 * 24 * 1000 * 1));
+				setCookie(name, '', expdate);
+			}
+			//检查是否存在此cookie
+			function checkCookie(cookieName, cookieValue){
+				if(getCookie(cookieName)==cookieValue){
+					return true;
+				} else{
+					return false;
+				}
+			}
+		</script>
