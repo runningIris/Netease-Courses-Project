@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>顶部通知条</title>
+</head>
+<body>
+	<div id="inform">
+		<span id="inform-content">网易云课堂微专业，帮助你掌握专业技能，令你求职或加薪多一份独特优势！</span>
+		<span id="inform-check">立即查看></span>
+		<span id="inform-close">× 不再提醒</span>
+	</div>
+	<script>
+		var closeFlag = false;
+		var inform = document.getElementById('inform');
+		var informClose = document.getElementById('inform-close');
+		informClose.onclick = function(){
+			if(!closeFlag){
+				inform.parentNode.removeChild(inform);
+				setCookie('closeFlag', 'true', '36000');
+				closeFlag = false;
+			}
+		}
+		function setCookie(name, value, expires){
+			var expdate = new Date();
+			expdate.setTime(expdate.getTime() + expires);
+			document.cookie = name + '=' + encodeURI(value) + ';expires=' + expires + ';path=/';
+		}
+	</script>
+</body>
+</html>
