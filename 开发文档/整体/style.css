@@ -42,4 +42,66 @@ a,a:hover{color:#333;}
 	color: #333333;
 }
 
-/*m-navigator*/
+/*m-nav*/
+.m-nav{
+	width: 1206px;
+	margin: 0 auto;
+}
+.m-nav .container{
+	margin: 36px 0;
+}
+.m-nav .logo{
+	height: 26px;
+	width: 78px;
+	background-image: url('./images/sprite.png');
+	background-position: -10px -12px;
+	float: left;
+}
+.m-nav .title{
+	font-size: 22px;
+	float: left;
+	margin-left: 22px;
+}
+.m-nav .login{
+	height: 22px;
+	width: 54px;
+	background-image: url('./images/sprite.png');
+	background-position: -11px -41px;
+	float: left;
+	margin-left: 30px;
+}
+.m-nav .login:hover{
+	background-position: -83px -41px;
+
+}
+.m-nav .fans{
+	width: 50px;
+	font-size: 12px;
+	line-height: 22px;
+	margin-left: 14px;
+	float: left;
+
+}
+.m-nav .links{
+	width: 800px;
+	float: right;
+}
+.m-nav .link{
+	font-size: 15px;
+	float: right;
+	margin-left: 55px;
+}
+.m-nav .link:hover{
+	color: #39a030;
+};
+.search{
+	float: right;
+    width: 18px;
+    height: 18px;
+    background-image: url(./images/sprite.png);
+    background-position: -11px -68px;
+    margin-left: 30px;
+}
+.search:hover{
+	background-position: -40px -68px;
+}
