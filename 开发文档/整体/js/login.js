@@ -25,18 +25,18 @@ var logoutStr = '<div class="logout"> \
 //登录弹窗节点
 var loginNode = html2node(loginStr);
 //弹窗关闭节点
-var lg_hide_Btn = loginNode.querySelector('.m-login .close-icon');
+var lg_hide_Btn = $(loginNode,'.m-login .close-icon');
 //弹窗提交节点
-var lg_submit_Btn = loginNode.querySelector('.m-login .submit');
+var lg_submit_Btn = $(loginNode, '.m-login .submit');
 
 //已登录节点
 var logoutNode = html2node(logoutStr);
-var lg_logout_Btn = logoutNode.querySelector('.cancel');
+var lg_logout_Btn = $(logoutNode, '.cancel');
 
 //关注节点
-var lg_show_Btn = $('.m-nav .login')[0];
+var lg_show_Btn = $('.m-nav .login');
 //导航粉丝数节点
-var fans = $('.fans .num')[0];
+var fans = $('.fans .num');
 //初始化粉丝数
 var fans_num = 45;
 fans.innerHTML = fans_num;
@@ -52,8 +52,8 @@ function submit(){
 	var test_user = 'Mary';
 	var test_password = '123456';
 
-	var user = loginNode.querySelector('.user').value;
-	var password = loginNode.querySelector('.password').value;
+	var user = $(loginNode,'.user').value;
+	var password = $(loginNode,'.password').value;
 
 	//登录成功后关闭弹窗、粉丝数+1、移除关注node、添加已关注node
 	if(user == test_user && password == test_password){
@@ -61,13 +61,13 @@ function submit(){
 		fans.innerHTML = parseInt(fans.innerHTML) + 1;
 		lg_show_Btn.parentNode.removeChild(lg_show_Btn);
 		//插入注销
-		$('.m-nav .container')[0].insertBefore(logoutNode, $('.m-nav .fans')[0])
+		$('.m-nav .container').insertBefore(logoutNode, $('.m-nav .fans'))
 	}
 
 }
 function logout(){
 	//插入关注节点
-	$('.m-nav .container')[0].insertBefore(lg_show_Btn, $('.m-nav .fans')[0])
+	$('.m-nav .container').insertBefore(lg_show_Btn, $('.m-nav .fans'))
 	logoutNode.parentNode.removeChild(logoutNode);
 } 
 

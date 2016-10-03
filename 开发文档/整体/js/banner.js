@@ -1,43 +1,52 @@
+var Banner = function(){
+	this.img = document.createElement('img');
+	this.container = $('.m-banner');
+	this.images = {};
+	this.index = 1;
+	this.navs = $$('.nav');
+	this.next = $('.next');
 
-
-function set_img(){
-	img.src = images[index];
-	for(var i = 0; i<navs.length; i++){
-		navs[i].style.backgroundColor='#fff';
-	}
-	navs[index-1].style.backgroundColor = '#000';
 }
-function chg_next(){
-	if(index<3){
-		index++;
+Banner.prototype.init = function(){
+	this.container.appendChild(this.img);
+	this.initImgs();
+	this.setImg();
+	this.changeSlide();
+}
+Banner.prototype.setImg = function(){
+	this.img.src = this.images[this.index];
+	for(var i = 0; i<this.navs.length; i++){
+		this.navs[i].style.backgroundColor='#fff';
+	}
+	this.navs[this.index-1].style.backgroundColor = '#000';
+}
+
+Banner.prototype.nextSlide = function(){
+	if(this.index<3){
+		this.index++;
 	}else{
-		index=1;
+		this.index=1;
 	}
-	set_img();
+	this.setImg();
 }
-function chg_nav(i){
-	return function(){
-		index = i;
-		set_img();	
+
+Banner.prototype.navSlide = function(){
+	return function(i){
+		this.index = i;
+		this.setImg();
 	}
 }
 
-var img = document.createElement('img');
-var banner_container = document.querySelector('.m-banner');
-banner_container.appendChild(img);
 
-var images = {};
-var index = 1;
-for(var i=1; i<4; i++){
-	images[i] = './images/banner' + i + '.jpg';
+Banner.prototype.initImgs = function(){
+	for(var i=1; i<4; i++){
+		this.images[i] = './images/banner' + i + '.jpg';
+	}
 }
-var navs = document.querySelectorAll('.nav');
 
-set_img();
-
-var next = document.querySelector('.next');
-
-for(var i = 0; i<navs.length; i++){
-	navs[i].addEventListener('click', chg_nav(i+1))
+Banner.prototype.changeSlide = function(){
+	for(var i = 0; i<this.navs.length; i++){
+		this.navs[i].addEventListener('click', this.navSlide);
+	}
 }
-setInterval(chg_next, 6000);
+

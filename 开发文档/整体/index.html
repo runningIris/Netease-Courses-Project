@@ -70,9 +70,17 @@
 	</div>
 	<!-- footer -->
 	<footer></footer>
-<script src="./js/util.js"></script>
+<script src="./js/main.js"></script>
 <script src="./js/inform.js"></script>
 <script src="./js/login.js"></script>
 <script src="./js/banner.js"></script>
+<script>
+	var banner = new Banner();
+	banner.init();
+	// banner.changeSlide();
+	setInterval(banner.nextSlide, 6000);
+	
+
+</script>
 </body>
 </html>

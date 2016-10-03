@@ -1,6 +1,6 @@
 var informCookie = getCookie('inform');
-var inform = document.getElementsByClassName('m-inform')[0];
-var informClose = inform.getElementsByClassName('close')[0];
+var inform = $('.m-inform');
+var informClose = $(inform,'.close');
 if (!informCookie){
  informClose.onclick = function (){
      inform.parentNode.removeChild(inform);
