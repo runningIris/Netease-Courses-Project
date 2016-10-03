@@ -77,9 +77,8 @@
 <script>
 	var banner = new Banner();
 	banner.init();
-	// banner.changeSlide();
-	setInterval(banner.nextSlide, 6000);
-	
+	setInterval(banner.nextSlide.bind(banner), 5000);
+
 
 </script>
 </body>

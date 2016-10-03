@@ -7,6 +7,7 @@ var Banner = function(){
 	this.next = $('.next');
 
 }
+
 Banner.prototype.init = function(){
 	this.container.appendChild(this.img);
 	this.initImgs();
@@ -30,13 +31,13 @@ Banner.prototype.nextSlide = function(){
 	this.setImg();
 }
 
-Banner.prototype.navSlide = function(){
-	return function(i){
-		this.index = i;
-		this.setImg();
+Banner.prototype.navSlide = function(i){
+	var fn = this;
+	return function(){
+		fn.index = i;
+		fn.setImg();
 	}
 }
-
 
 Banner.prototype.initImgs = function(){
 	for(var i=1; i<4; i++){
@@ -46,7 +47,7 @@ Banner.prototype.initImgs = function(){
 
 Banner.prototype.changeSlide = function(){
 	for(var i = 0; i<this.navs.length; i++){
-		this.navs[i].addEventListener('click', this.navSlide);
+		this.navs[i].addEventListener('click', Banner.prototype.navSlide.bind(this)(i+1));
 	}
 }
 
