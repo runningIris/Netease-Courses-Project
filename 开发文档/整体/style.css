@@ -21,6 +21,10 @@ body{background:#fff;}
 a,a:hover{color:#333;}
 
 
+
+
+
+
 /*m-inform*/
 .m-inform{
 	background-color: #f3f3f3;
@@ -41,6 +45,10 @@ a,a:hover{color:#333;}
 	float: right;
 	color: #333333;
 }
+
+
+
+
 
 /*m-nav*/
 .m-nav{
@@ -73,7 +81,6 @@ a,a:hover{color:#333;}
 .m-nav .login:hover{
 	background-position: -83px -41px;
 }
-
 .m-nav .logout{
 	line-height: 22px;
 	width: 95px;
@@ -86,7 +93,6 @@ a,a:hover{color:#333;}
 .m-nav .logout:hover{
 	background-color: #ffffff;
 }
-
 .m-nav .check-icon{
 	display: inline-block;
 	width: 15px;
@@ -94,7 +100,6 @@ a,a:hover{color:#333;}
 	background-image: url('./images/sprite.png');
 	background-position: -75px -77px;
 }
-
 .m-nav .cancel{
 	color: #999999;
 	cursor: pointer;
@@ -136,6 +141,13 @@ a,a:hover{color:#333;}
 .search:hover{
 	background-position: -40px -68px;
 }
+
+
+
+
+
+
+
 
 /*m-login*/
 
@@ -197,3 +209,40 @@ body{
 	right: 10px;
 	font-size: 18px;
 }
+
+
+/*m-banner*/
+.m-banner{
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+	margin-top: 38px;
+	float: left;
+}
+.m-banner .icons{
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+}
+.m-banner .icon{
+	width: 10px;
+	height: 10px;
+	background-color: #fff;
+	margin: 10px;
+	display: inline-block;
+	border-radius: 5px;
+}
+.m-banner .icon:hover{
+	background-color: #000;
+}
+
+
+
+
+
+
+
+
+
+
+
