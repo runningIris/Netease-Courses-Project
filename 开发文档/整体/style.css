@@ -100,7 +100,7 @@ a,a:hover{color:#333;}
 	width: 15px;
 	height: 10px;
 	background-image: url('./images/sprite.png');
-	background-position: -75px -77px;
+	background-position: -75px -80px;
 }
 .m-nav .cancel{
 	color: #999999;
@@ -143,7 +143,6 @@ a,a:hover{color:#333;}
 .search:hover{
 	background-position: -40px -68px;
 }
-
 
 
 
@@ -225,6 +224,7 @@ body{
 	position: absolute;
 	bottom: 20px;
 	left: 50%;
+	transform: translate(-50%,-50%);
 }
 .m-banner .icon{
 	width: 10px;
@@ -237,6 +237,14 @@ body{
 .m-banner .icon:hover{
 	background-color: #000;
 }
+
+.m-banner img{
+	width: 100%;
+}
+
+
+
+
 
 
 /*m-3products*/
@@ -260,14 +268,12 @@ body{
 .m-3products .logo{
 	width: 85px;
 	height: 82px;
-}
-.m-3products .logo, .m-3products .content{
-	display: inline-block;
-	vertical-align: middle;
-
+	float: left;
+	margin: 10px;
 }
 .m-3products .content{
 	width: 245px;
+	float: left;
 }
 
 .m-3products h3{
@@ -275,17 +281,25 @@ body{
 	margin-bottom: 20px;
 	font-weight: normal;
 }
-
-
-
 .m-3products p{
 	margin-bottom: 30px;
 }
-
 .m-3products a{
 	color: #39a030;
 }
-
 .m-3products a:hover{
 	text-decoration: underline;
+}
+
+
+
+
+/*m-work-enviroment*/
+.m-work-enviroment{
+	position: relative;
+	top: 100px;
+	width: 100%;
+}
+.m-work-enviroment img{
+	width: 100%;
 }
