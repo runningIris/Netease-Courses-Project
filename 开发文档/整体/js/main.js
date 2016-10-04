@@ -1,18 +1,18 @@
-function $(){
-	if(arguments.length == 1){
-		return document.querySelector(arguments[0]);
-	} else if(arguments.length == 2){
-		return arguments[0].querySelector(arguments[1]);
-	}
-}
-
-function $$(node,selector){
-	if(arguments.length == 1){
-		return [].slice.call(document.querySelectorAll(arguments[0]));
-	} else if(arguments.length == 2){
-		return [].slice.call(arguments[0].querySelectorAll(arguments[1]));
-	}
-}
-
 /* 预设登录账户 */
 console.log('预设登录账户：\n User:Mary \n Password: 123456');
+
+var banner = new Banner();
+banner.init();
+setInterval(banner.nextSlide.bind(banner), 5000);
+
+var sprite = './images/sprite.png';
+
+var products = $$('.m-3products .logo');
+
+var height = -98;
+var width = -11;
+for(var i = 0; i < products.length; i++){
+	products[i].style.backgroundImage = 'url(' + sprite + ')';
+	products[i].style.backgroundPosition = width + 'px ' + height + 'px';
+	width -= 86;
+}

@@ -24,6 +24,11 @@ a,a:hover{color:#333;}
 
 
 
+.m-nav, .m-3products{
+	width: 1206px;
+	margin: 0 auto;
+}
+
 
 /*m-inform*/
 .m-inform{
@@ -51,10 +56,7 @@ a,a:hover{color:#333;}
 
 
 /*m-nav*/
-.m-nav{
-	width: 1206px;
-	margin: 0 auto;
-}
+
 .m-nav .container{
 	margin: 36px 0;
 }
@@ -237,12 +239,53 @@ body{
 }
 
 
+/*m-3products*/
+.m-3products{
+	top: 55px;
+	position: relative;
+	/*background-color: #e1e4f5;*/
+	display: flex;
+
+}
+
+.m-3products .product{
+	width: 402px;
+	flex: 1;
+	margin: 10px;
+	/*background-color: #345678;*/
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.m-3products .logo{
+	width: 85px;
+	height: 82px;
+}
+.m-3products .logo, .m-3products .content{
+	display: inline-block;
+	vertical-align: middle;
+
+}
+.m-3products .content{
+	width: 245px;
+}
+
+.m-3products h3{
+	font-size: 22px;
+	margin-bottom: 20px;
+	font-weight: normal;
+}
 
 
 
+.m-3products p{
+	margin-bottom: 30px;
+}
 
+.m-3products a{
+	color: #39a030;
+}
 
-
-
-
-
+.m-3products a:hover{
+	text-decoration: underline;
+}

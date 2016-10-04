@@ -1,9 +1,3 @@
-//把字符串转化为节点
-function html2node(str){
-	var container = document.createElement('div');
-	container.innerHTML = str;
-	return container.children[0];
-}
 //登录弹窗的HTML结构
 var loginStr = '<div class="m-login">\
 		<div class="align"></div> \
