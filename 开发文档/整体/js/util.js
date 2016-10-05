@@ -20,3 +20,5 @@ function html2node(str){
 	container.innerHTML = str;
 	return container.children[0];
 }
+
+var tabs = $$('.m-tabs .sub');
