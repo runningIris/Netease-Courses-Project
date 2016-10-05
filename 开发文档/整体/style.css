@@ -60,7 +60,7 @@ a,a:hover{color:#333;}
 .m-nav .container{
 	margin: 36px 0;
 }
-.m-nav .logo{
+.m-nav .logo, footer .logo{
 	height: 26px;
 	width: 78px;
 	background-image: url('./images/sprite.png');
@@ -70,7 +70,7 @@ a,a:hover{color:#333;}
 .m-nav .title{
 	font-size: 22px;
 	float: left;
-	margin-left: 22px;
+	margin-left: 20px;
 }
 .m-nav .login{
 	height: 22px;
@@ -302,4 +302,54 @@ body{
 }
 .m-work-enviroment img{
 	width: 100%;
+}
+
+
+
+
+/*footer*/
+
+footer{
+	position: relative;
+	top: 100px;
+	height: 262px;
+	background-color: #2c3339;
+}
+footer .container{
+	margin: 0 auto;
+	width: 1206px;
+
+	padding-top: 80px;
+	padding-left: 100px;
+}
+footer .copyright{
+	width: 500px;
+	float: left;
+	margin-left: 45px;
+}
+footer h2{
+	font-size: 22px;
+	color: #39a030;
+	font-weight: normal;
+	margin-bottom: 30px;
+}
+footer small, footer p{
+	letter-spacing: 1px;
+	color: #bebfc0;
+	margin-bottom: 15px;
+	display: block;
+}
+footer p{
+	font-size: 14px;
+}
+footer p:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+footer .links{
+	margin-left: 
+}
+footer .links, footer .us, footer .more{
+	float: left;
+	padding: 0 45px;
 }
