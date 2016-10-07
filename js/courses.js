@@ -158,12 +158,15 @@ function setCourse(){
 	loadCourses();
 	pageTurner(4);
 	setPage();
-	loadHotCourses();
+	setInterval(loadHotCourses(), 5000);
 
 }
 
 //加载最热课程
 function loadHotCourses(){
+	var flag = 0;
+	var hotCourses = [];
+	var container = $('.m-hotCourses .content')
 	var hotCourse = function(){
 		return html2node('<div class="container">\
 							<img>\
@@ -171,30 +174,33 @@ function loadHotCourses(){
 							<div class="learnerCount"></div>\
 						</div>')
 	}
-	var hotCourses = [];
-	var container = $('.m-hotCourses .content')
 	for(var i = 0; i < 10; i++){
 		var hc = hotCourse();
 		hotCourses.push(hc);
 		container.appendChild(hc);
 	}
-	console.log(hotCourses, container);
-	var data = {
-		url: 'http://study.163.com/webDev/hotcouresByCategory.htm',
-		async: true,
-		success: function(data){
-			console.log(data);
-			for(var i = 0; i < 10; i++){
-				var img = hotCourses[i].children[0];
-				var name = hotCourses[i].children[1];
-				var learnerCount = hotCourses[i].children[2];
-				img.src = data[i]['smallPhotoUrl'];
-				name.innerText = data[i]['name'];
-				learnerCount.innerText = data[i]['learnerCount'];
+	return function(){
+		flag = (flag + 10)%20
+		var data = {
+			url: 'http://study.163.com/webDev/hotcouresByCategory.htm',
+			async: true,
+			success: function(data){
+				console.log(data);
+				for(var i = 0; i < 10; i++){
+					var img = hotCourses[i].children[0];
+					var name = hotCourses[i].children[1];
+					var learnerCount = hotCourses[i].children[2];
+					img.src = data[i+flag]['smallPhotoUrl'];
+					name.innerText = data[i+flag]['name'];
+					learnerCount.innerText = data[i+flag]['learnerCount'];
+				}
 			}
+			
 		}
+		getAjax(data);
 	}
-	getAjax(data);
+}
 
-
+function loadVideo(){
+	
 }
