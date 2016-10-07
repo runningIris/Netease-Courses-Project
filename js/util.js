@@ -47,8 +47,11 @@ function getAjax(data){
 	}
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
+			console.log('success')
 			var data = JSON.parse(xhr.responseText);
 			return obj.success(data);
+		} else{
+			console.log('unsuccessful')
 		}
 	}
 }

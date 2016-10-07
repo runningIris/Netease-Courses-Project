@@ -573,6 +573,7 @@ body{
 .m-hotCourses .container{
 	position: relative;
 	width: inherit;
+	margin-bottom: 20px;
 }
 
 .m-hotCourses .content{
@@ -589,12 +590,20 @@ body{
 .m-hotCourses div{
 	width: 120px;
 	float: left;
-	padding: 10px;
+}
+
+.m-hotCourses .learnerCount{
+	color: #999999;
+	padding-left: 20px;
+	background-image: url(./images/sprite.png);
+	background-position: -135px -75px;
 }
 .m-hotCourses .name{
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	padding: 0px 10px 10px;
+
 }
 
 .m-hotCourses .title{
