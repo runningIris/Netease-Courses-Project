@@ -10,7 +10,7 @@ function setProduct(){
 	}
 }
 
-
+//tab选择课程类型
 function tabEvent(){
 	var tabs = $('.m-tabs').children;
 
@@ -32,23 +32,30 @@ function tabEvent(){
 }
 
 function Course(){
-	this.container = document.createElement('div'),
-	this.container.className = 'course';
-	this.obj = {
-		img: document.createElement('img'),
-		name: document.createElement('h5'),
-		provider: document.createElement('div'),
-		learnerCount: document.createElement('div'),
-		price: document.createElement('div')
 
-	}
-	this.obj.price.innerText = '￥ ';
-	for(var key in this.obj){
-		this.obj[key].className = key;
-		this.container.appendChild(this.obj[key]);
+	var template = '<li class="course">\
+							<div class="show">\
+								<img>\
+								<h5 class="name"></h5>\
+								<div class="provider"></div>\
+								<div class="learnerCount"></div>\
+								<div class="price"></div>\
+							</div>\
+							<div class="hover">\
+								<div class="content">\
+									<h5 class="name"></h5>\
+									<div class="learnerCount"></div>\
+									<p class="provider"></p>\
+									<p class="categoryName"></p>\
+								</div>\
+								<p class="description"></p>\
+							</div>\
+						</li>'
+	this.nodeObj = html2node(template);
 
-	}
 }
+
+//加载课程
 function loadCourses(){
 	
 	var data = {
@@ -56,20 +63,31 @@ function loadCourses(){
 		async: true,
 		success: function(data){
 			window.totalPageCount = data['totalPage'];
-			console.log(data)
-
 			for(var i = 0; i < data.list.length; i++){
-				window.courses[i].obj.img.src = data.list[i]['middlePhotoUrl'];
-				var temp = ['name', 'price', 'provider', 'learnerCount'];
-				for(var j = 0; j < temp.length; j++){
-					window.courses[i].obj[temp[j]].innerText = data.list[i][temp[j]];
+				var course = window.courses[i].children[0];
+				course.children[0].src = data.list[i]['middlePhotoUrl'];
+				for(var j = 1; j < 5; j++){
+					course.children[j].innerText = data.list[i][course.children[j].className];
 				}
+				course.children[4].innerText = '￥ ' + course.children[4].innerText
+
+				//hover
+				var hover = window.courses[i].children[1];
+				var content = hover.children[0]
+				for(var k = 0; k < content.children.length; k++){
+					content.children[k].innerText = data.list[i][content.children[k].className];
+				}
+				var description = hover.children[1];
+				description.innerText = data.list[i]['description'];
+
 			}
 		}
 	}
 	getAjax(data);	
 }
 
+
+//创建翻页器
 function pageTurner(totalPageCount){
 	var container = $('.page-turner .index');
 	for(var i = 0; i < totalPageCount; i++){
@@ -80,6 +98,7 @@ function pageTurner(totalPageCount){
 	}
 }
 
+//翻页器功能
 function setPage(){
 	var pages = $$('.page');
 	var prev = $('.page-turner .prev');
@@ -88,9 +107,6 @@ function setPage(){
 		for(var i = 0; i < pages.length; i++){
 			pages[i].style.color = '#b3b3b3';
 		}
-		// pages.forEach(item, function(){
-		// 	item.style.color = '#eef8f2';
-		// })
 		pages[window.page - 1].style.color = '#456844';
 	}
 	var changePage = function(){
@@ -124,14 +140,14 @@ function setPage(){
 
 
 
-
+//设置所有的课程内容
 function setCourse(){
 	var container = $('.m-courses');
 	window.courses = [];
 	for(var i = 0; i < 20; i++){
 		var course = new Course();
-		container.appendChild(course.container)
-		window.courses.push(course);
+		container.appendChild(course.nodeObj)
+		window.courses.push(course.nodeObj);
 	}
 
 	window.page = 1;
@@ -142,5 +158,43 @@ function setCourse(){
 	loadCourses();
 	pageTurner(4);
 	setPage();
+	loadHotCourses();
+
+}
+
+//加载最热课程
+function loadHotCourses(){
+	var hotCourse = function(){
+		return html2node('<div class="container">\
+							<img>\
+							<div class="name"></div>\
+							<div class="learnerCount"></div>\
+						</div>')
+	}
+	var hotCourses = [];
+	var container = $('.m-hotCourses .content')
+	for(var i = 0; i < 10; i++){
+		var hc = hotCourse();
+		hotCourses.push(hc);
+		container.appendChild(hc);
+	}
+	console.log(hotCourses, container);
+	var data = {
+		url: 'http://study.163.com/webDev/hotcouresByCategory.htm',
+		async: true,
+		success: function(data){
+			console.log(data);
+			for(var i = 0; i < 10; i++){
+				var img = hotCourses[i].children[0];
+				var name = hotCourses[i].children[1];
+				var learnerCount = hotCourses[i].children[2];
+				img.src = data[i]['smallPhotoUrl'];
+				name.innerText = data[i]['name'];
+				learnerCount.innerText = data[i]['learnerCount'];
+			}
+		}
+	}
+	getAjax(data);
+
 
 }

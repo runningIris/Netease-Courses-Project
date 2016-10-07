@@ -304,6 +304,8 @@ body{
 	width: 100%;
 }
 
+
+/*main*/
 .main{
 	position: relative;
 	top: 100px;
@@ -316,7 +318,7 @@ body{
 }
 .main .right{
 	width: 226px;
-	height: 1029px;
+	height: inherit;
 	float: left;
 }
 .main .wraper{
@@ -378,17 +380,56 @@ body{
 	position: relative;
 }
 .m-courses .course:hover{
+
+}
+
+.m-courses .show{
+	position: absolute;
+	z-index: 2;
 }
 
 
-.m-courses img{
+
+.m-courses .hover{
+	position: absolute;
+	top: -10px;
+	left: -10px;
+	background-color: rgba(0,0,0,0);
+	height: 240px;
+	width: 480px;
+	z-index: 3;
+	display: none;
+}
+.m-courses .hover:hover{	
+}
+
+.m-courses .hover .content{
+	position: absolute;
+	width: 220px;
+	height: 110px;
+	top: 20px;
+	right: 0;
+}
+
+.m-courses .hover .description{
+	width: 480px;
+	height: 110px;
+	bottom: 0;
+	position: absolute;
+	background-color: #fff;
+}
+
+
+
+.m-courses .show img{
 	width: 220px;
 	height: 124px;
 	margin: 1px;
 	float: left;
+	z-index: 5;
 }
 
-.m-courses h5{
+.m-courses .show .name{
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -401,7 +442,7 @@ body{
 	padding-left: 5px;
 }
 
-.m-courses .provider{
+.m-courses .show .provider{
 	position: absolute;
 	color: #d0d0d0;
 	top: 150px;
@@ -409,7 +450,7 @@ body{
 
 }
 
-.m-courses .learnerCount{
+.m-courses .show .learnerCount{
 	width: 40px;
 	line-height: 18px;
 	top: 170px;
@@ -424,7 +465,7 @@ body{
 	color: #999999;
 }
 
-.m-courses .price{
+.m-courses .show .price{
 	font-size: 12px;
 	color: #ff3f00;
 	font-weight: bold;
@@ -433,6 +474,7 @@ body{
 	position: absolute;
 
 }
+
 
 
 /*翻页器*/
@@ -487,7 +529,7 @@ body{
 }
 
 /*m-institudes*/
-.m-institudes .title, .m-institudes .content, .m-hotest .title, .m-hotest .content{
+.m-institudes .title, .m-institudes .content, .m-hotCourses .title, .m-hotCourses .content{
 	width: inherit;
 	border: 1px solid #ecebeb;
 	border-top: none;
@@ -495,11 +537,13 @@ body{
 }
 
 
-.m-institudes .title, .m-hotest .title{
+.m-institudes .title, .m-hotCourses .title{
 	height: 56px;
 	font-size: 16px;
 	line-height: 56px;
 	text-align: center;
+	box-sizing: border-box;
+
 }
 .m-institudes .content{
 	height: 174px;
@@ -517,16 +561,51 @@ body{
 	background-image: url(./images/sprite.png);
 	background-position: -112px -196px;
 }
-.m-hotest{
+
+
+/*m-hotCourses*/
+
+.m-hotCourses{
 	margin-top: 20px;
-}
-.m-hotest .content{
-	height: 720px;
+	width: inherit;
 }
 
+.m-hotCourses .container{
+	position: relative;
+	width: inherit;
+}
 
+.m-hotCourses .content{
+	box-sizing: border-box;
+	height: inherit;
+	padding: 10px;
+
+}
+.m-hotCourses img{
+	width: 50px;
+	height: 50px;
+	float: left;
+}
+.m-hotCourses div{
+	width: 120px;
+	float: left;
+	padding: 10px;
+}
+.m-hotCourses .name{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.m-hotCourses .title{
+	width: 226px;
+}
 
 /*footer*/
+
+body{
+	position: relative;
+}
 
 footer{
 	position: relative;
