@@ -1,7 +1,6 @@
 function login(){
 	//登录弹窗的HTML结构
 	var loginStr = '<div class="m-login">\
-			<div class="align"></div> \
 			<div class="wraper"> \
 				<div class="content"> \
 					<h4>登录网易云课堂</h4> \

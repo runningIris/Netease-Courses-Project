@@ -158,7 +158,9 @@ function setCourse(){
 	loadCourses();
 	pageTurner(4);
 	setPage();
+
 	setInterval(loadHotCourses(), 5000);
+	loadVideo();
 
 }
 
@@ -180,12 +182,11 @@ function loadHotCourses(){
 		container.appendChild(hc);
 	}
 	return function(){
-		flag = (flag + 10)%20
+		flag = (flag + 1)%10
 		var data = {
 			url: 'http://study.163.com/webDev/hotcouresByCategory.htm',
 			async: true,
 			success: function(data){
-				console.log(data);
 				for(var i = 0; i < 10; i++){
 					var img = hotCourses[i].children[0];
 					var name = hotCourses[i].children[1];
@@ -202,5 +203,26 @@ function loadHotCourses(){
 }
 
 function loadVideo(){
+	var str = '<div class="m-video">\
+					<div class="wraper">\
+						<div class="content">\
+							<h4 style="backgroundColor=#aad330">Hi there</h4>\
+							<video src=""></video>\
+							<span class="close"></span>\
+						</div>\
+					</div>\
+				</div>"'
+	var container = html2node(str);
+	console.log(container);
+	var trigger = $('.m-institudes .video');
+	function showVideo(){
+		document.body.appendChild(container);
+	}
+	var closer = $(container, '.m-video .close');
 	
+	function closeVideo(){
+		container.parentNode.removeChild(container);
+	}
+	trigger.addEventListener('click', showVideo);
+	closer.addEventListener('click', closeVideo);
 }
