@@ -18,6 +18,20 @@ window.onload = function(){
 		products[i].style.backgroundPosition = width + 'px ' + height + 'px';
 		width -= 86;
 	}
-	loadCourses();
+var container = $('.m-courses');
+window.courses = [];
+for(var i = 0; i < 20; i++){
+	var course = new Course();
+	container.appendChild(course.container)
+	window.courses.push(course);
+}
+
+
+
+
+	window.type = 10;
+	tabEvent();
+
+	loadCourses(window.courses, 10);
 
 }
