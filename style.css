@@ -437,7 +437,6 @@ body{
 
 /*翻页器*/
 .page-turner{
-	/*background-color: #459f32;*/
 	width: 1000px;
 	height: 24px;
 	margin-top: 32px;
@@ -459,6 +458,10 @@ body{
 	font-weight: bolder;
 	margin: 0 20px;
 }
+.page-turner .prev:hover, .page-turner .next:hover{
+	background-color: #5aa490;
+}
+
 
 .page-turner .container{
 	float: right;
@@ -468,12 +471,19 @@ body{
 	font-size: 14px;
 	font-weight: bolder;
 	margin: 0;
+}
+
+.page-turner .index .page{
+	display: inline-block;
+	width: 20px;
+	margin: 0 5px;
 
 }
 
-.page-turner .index:hover{
+.page-turner .index .page:hover{
 	background-color: #9dd8b1;
 	color: #eef8f2;
+	cursor: default;
 }
 
 /*m-institudes*/
