@@ -206,9 +206,9 @@ function loadVideo(){
 	var str = '<div class="m-video">\
 					<div class="wraper">\
 						<div class="content">\
-							<h4 style="backgroundColor=#aad330">Hi there</h4>\
-							<video src=""></video>\
-							<span class="close"></span>\
+							<span class="close">×</span>\
+							<h4>请观看下面的视频</h4>\
+							<video src="http://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4" controls="controls"></video>\
 						</div>\
 					</div>\
 				</div>"'

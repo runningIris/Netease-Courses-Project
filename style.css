@@ -445,7 +445,7 @@ body{
 }
 
 .m-courses .show .learnerCount{
-	width: 40px;
+	width: auto;
 	line-height: 18px;
 	top: 170px;
 	margin-left: 5px;
@@ -454,7 +454,7 @@ body{
 	border-radius: 2px;
 	background-image: url(./images/sprite.png);
 	background-position: -140px -74px;
-	text-align: right;
+	padding: 0 20px;
 	padding-right: 2px;
 	color: #999999;
 }
@@ -551,9 +551,6 @@ body{
 	width: 180px;
 	height: 110px;
 	margin: 0 20px;
-	background-color: #555;
-	background-image: url(./images/sprite.png);
-	background-position: -112px -196px;
 }
 
 
@@ -607,14 +604,43 @@ body{
 
 /*m-video*/
 .m-video{
-	width: 100px;
-	height: 100px;
-	background-color: #4498ff;
+	width: 100%;
+	height: 100%;
 	position: absolute;
-	top: 300px;
-	left: 500px;
+	top: 0;
+	z-index: 99;
+	background-color: rgba(0,0,0,0.5);
 }
 
+.m-video .wraper{
+	width: auto;
+	height: auto;
+	background-color: #fff;
+	position: fixed;
+	top: 10px;
+	left: 100px;
+	/*left: 200px;*/
+	z-index: 99;
+}
+.m-video video{
+	height: 566px;
+	width: 890px;
+	margin: 0 30px;
+}
+.m-video h4{
+	padding: 30px 30px 0;
+	font-size: 18px;
+
+}
+.m-video .close{
+	height: 20px;
+	width: 20px;
+	font-size: 18px;
+	font-weight: bold;
+	display: block;
+	float: right;
+	margin-top: 5px;
+}
 /*footer*/
 
 body{
