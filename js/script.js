@@ -1,3 +1,198 @@
+//通知条模块
+function inform(){
+	var informCookie = getCookie('inform');
+	var inform = $('.m-inform');
+	var informClose = $(inform,'.close');
+	if (!informCookie){
+	 informClose.onclick = function (){
+	     inform.parentNode.removeChild(inform);
+	     setCookie('inform', 'true', '36000');
+	 }
+	} else{
+	 inform.parentNode.removeChild(inform);
+	}
+
+	function setCookie(name, value, expires){
+	 var expdate = new Date();
+	 expdate.setTime(expdate.getTime() + expires);
+	 document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value) + ';expires=' + expires + ';path=/';
+	}
+	function getCookie(name){
+	 var cookieName = encodeURIComponent(name) + '=';
+	 var cookieStart = document.cookie.indexOf(cookieName);
+	 var cookieValue = null;
+	 if (cookieStart > -1){
+	     var cookieEnd = document.cookie.indexOf(';', cookieStart);
+	     if (cookieEnd == -1){
+	         cookieEnd = document.cookie.length;
+	     }
+	     cookieValue = decodeURIComponent(document.cookie.substring(cookieStart + cookieName.length, cookieEnd));
+	     return cookieValue;
+	 }
+	}
+	function deleteCookie(name){
+	 document.cookie = encodeURIComponent(name) + '=;expires=' + new Date(0);
+	}
+
+}
+
+
+//登录及关注界面
+function login(){
+	//登录弹窗的HTML结构
+	
+	var loginStr = '<div class="m-login">\
+			<div class="wraper"> \
+				<div class="content"> \
+					<h4>登录网易云课堂</h4> \
+					<input class="user" type="text" placeholder="账号"> \
+					<input class="password" type="password" placeholder="密码"> \
+					<input class="submit" type="submit" value="登录"> \
+				</div> \
+				<span class="close-icon">×</span> \
+			</div> \
+		</div>'
+
+	var logoutStr = '<div class="logout"> \
+						<div class="check-icon"></div> 已关注 | <span class="cancel">取消</span> \
+					</div>'
+
+	//登录弹窗节点
+	var loginNode = html2node(loginStr);
+	//弹窗关闭节点
+	var hideBtn = $(loginNode,'.m-login .close-icon');
+	//弹窗提交节点
+	var submitBtn = $(loginNode, '.m-login .submit');
+
+	//已登录节点
+	var logoutNode = html2node(logoutStr);
+	var logoutBtn = $(logoutNode, '.cancel');
+
+	//关注节点
+	var showBtn = $('.m-nav .login');
+	//导航粉丝数节点
+	var fans = $('.fans .num');
+	//初始化粉丝数
+	var fans_num = 45;
+	fans.innerHTML = fans_num;
+
+	function show(){
+		document.body.appendChild(loginNode);
+	}
+	function hide(){
+		document.body.removeChild(loginNode);
+	}
+
+	
+	
+	function submit(){
+		//预设的账号登录
+		// var test_user = 'Mary';
+		// var test_password = '123456';
+
+		var user = $(loginNode,'.user').value;
+		var password = $(loginNode,'.password').value;
+		checkInfo();
+		//登录成功后关闭弹窗、粉丝数+1、移除关注node、添加已关注node
+		// if(user == test_user && password == test_password){
+		// 	hide();
+		// 	fans.innerHTML = parseInt(fans.innerHTML) + 1;
+		// 	showBtn.parentNode.removeChild(showBtn);
+		// 	//插入注销
+		// 	$('.m-nav .container').insertBefore(logoutNode, $('.m-nav .fans'))
+		// }
+
+		function checkInfo(){
+		var data = {
+			url: 'http://study.163.com /webDev/login.htm?userName=1&password=2',
+			async: true,
+			success: function(data){
+				console.log(data);
+				}
+			}
+		
+		getAjax(data);
+		}	
+
+	}
+
+
+	
+	function logout(){
+		//插入关注节点
+		$('.m-nav .container').insertBefore(showBtn, $('.m-nav .fans'))
+		logoutNode.parentNode.removeChild(logoutNode);
+	} 
+
+	showBtn.addEventListener('click', show);
+	hideBtn.addEventListener('click', hide);
+	submitBtn.addEventListener('click', submit);
+	logoutBtn.addEventListener('click', logout);
+}
+
+
+//轮播横幅
+function banner(){
+	var Banner = function(){
+		this.img = document.createElement('img');
+		this.container = $('.m-banner');
+		this.images = {};
+		this.index = 1;
+		this.navs = $$('.nav');
+		this.next = $('.next');
+
+	}
+
+	Banner.prototype.init = function(){
+		this.container.appendChild(this.img);
+		this.initImgs();
+		this.setImg();
+		this.changeSlide();
+	}
+	Banner.prototype.setImg = function(){
+		this.img.src = this.images[this.index];
+		for(var i = 0; i<this.navs.length; i++){
+			this.navs[i].style.backgroundColor='#fff';
+		}
+		this.navs[this.index-1].style.backgroundColor = '#000';
+	}
+
+	Banner.prototype.nextSlide = function(){
+		if(this.index<3){
+			this.index++;
+		}else{
+			this.index=1;
+		}
+		this.setImg();
+	}
+
+	Banner.prototype.navSlide = function(i){
+		var fn = this;
+		return function(){
+			fn.index = i;
+			fn.setImg();
+		}
+	}
+
+	Banner.prototype.initImgs = function(){
+		for(var i=1; i<4; i++){
+			this.images[i] = './images/banner' + i + '.jpg';
+		}
+	}
+
+	Banner.prototype.changeSlide = function(){
+		for(var i = 0; i<this.navs.length; i++){
+			this.navs[i].addEventListener('click', Banner.prototype.navSlide.bind(this)(i+1));
+		}
+	}
+
+	var banner = new Banner();
+	banner.init();
+	setInterval(banner.nextSlide.bind(banner), 5000);
+
+}
+
+//页面中部关于三个产品的介绍
 function setProduct(){
 	var sprite = './images/sprite.png';
 	var products = $$('.m-3products .logo');
@@ -141,7 +336,7 @@ function setPage(){
 
 
 //设置所有的课程内容
-function setCourse(){
+function setMainSection(){
 	var container = $('.m-courses');
 	window.courses = [];
 	for(var i = 0; i < 20; i++){
@@ -154,7 +349,6 @@ function setCourse(){
 	window.type = 10;
 	window.size = 20;
 	tabEvent();
-	console.log('page turner');
 	loadCourses();
 	pageTurner(4);
 	setPage();
@@ -213,7 +407,6 @@ function loadVideo(){
 					</div>\
 				</div>"'
 	var container = html2node(str);
-	console.log(container);
 	var trigger = $('.m-institudes .video');
 	function showVideo(){
 		document.body.appendChild(container);
@@ -225,4 +418,8 @@ function loadVideo(){
 	}
 	trigger.addEventListener('click', showVideo);
 	closer.addEventListener('click', closeVideo);
+}
+
+function furtherInformation(){
+	console.log('为了方便老师们改作业，我就列一下尚未实现的功能吧：\n1. 登录框没写好交互需求\n2. 轮播的淡入淡出效果以及悬停效果没实现\n3. 课程列表的hover效果没实现\n4. bug: 最热课程最初有五秒没有数据传入\n谢谢老师！')
 }

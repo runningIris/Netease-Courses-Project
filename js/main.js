@@ -1,8 +1,9 @@
 
 window.onload = function(){
-	// banner
+	furtherInformation();
+	inform();
 	login();
 	banner();
 	setProduct();
-	setCourse();
+	setMainSection();
 }
