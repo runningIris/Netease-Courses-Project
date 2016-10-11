@@ -396,3 +396,4 @@ function loadVideo(){
 	trigger.addEventListener('click', showVideo);
 	closer.addEventListener('click', closeVideo);
 }
+
