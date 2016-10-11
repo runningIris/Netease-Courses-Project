@@ -396,7 +396,3 @@ function loadVideo(){
 	trigger.addEventListener('click', showVideo);
 	closer.addEventListener('click', closeVideo);
 }
-
-function furtherInformation(){
-	console.log('为了方便老师们改作业，我就列一下尚未实现的功能吧：\n1. 登录框没写好交互需求\n2. 轮播的淡入淡出效果以及悬停效果没实现\n3. 课程列表的hover效果没实现\n4. bug: 最热课程最初有五秒没有数据传入\n谢谢老师！')
-}

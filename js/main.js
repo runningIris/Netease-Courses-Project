@@ -1,6 +1,5 @@
 
 window.onload = function(){
-	furtherInformation();
 	inform();
 	login();
 	banner();
