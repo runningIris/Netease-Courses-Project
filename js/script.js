@@ -17,11 +17,6 @@ function inform(){
 //登录及关注界面
 function follow(){
 	//登录弹窗的HTML结构
-	// var loginSuc = sessionStorage['loginSuc'];
-	// console.log('login: ', loginSuc);
-	// var followSuc = sessionStorage['followSuc'];
-	// console.log('follow:', followSuc);
-
 	var nodes = {
 		follow: html2node('<div class="follow"></div>'),
 		unfollow: html2node('<div class="unfollow"> \
@@ -44,10 +39,9 @@ function follow(){
 		follow: function(){
 			if(sessionStorage['loginSuc']){
 				$('.fans .num').innerText = parseInt($('.fans .num').innerText) + 1;
-				setFollowCookie();
+				setFollowSession();
 				nodes.container.removeChild(nodes.follow);
 				nodes.container.appendChild(nodes.unfollow);
-				console.log(loginSuc,followSuc)
 				sessionStorage['followSuc'] = true;
 			} else{
 				//显示登录节点，监听submit
@@ -89,14 +83,13 @@ function follow(){
 
 	}
 
-	function setFollowCookie(){
+	function setFollowSession(){
 		var data = {
 			url: 'http://study.163.com/webDev/attention.htm',
 			async: true,
 			success: function(data){
 				if(data == 1){
 					sessionStorage['followSuc'] = 'true';
-					setCookie('followSuc', 'true', 18000);
 					console.log(data);
 				}
 			}
