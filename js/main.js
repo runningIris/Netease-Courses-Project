@@ -1,7 +1,6 @@
-
 window.onload = function(){
 	inform();
-	login();
+	follow();
 	banner();
 	setProduct();
 	setMainSection();

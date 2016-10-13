@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo</title>
+</head>
+<body>
+	<div id="index">Hey</div>
+	<script>
+		function Demo(){
+			this.index = document.getElementById('index');
+			this.newNode = document.createElement('div');
+			this.newNode.innerHTML = 'newNode';
+		}
+		Demo.prototype.addNode = function(){
+			console.log(this);
+			this.appendChild(Demo.newNode);
+		}
+		Demo.prototype.ad = function(){
+			this.index.addEventListener('click',this.addNode)
+		}
+		var demo = new Demo();
+		demo.ad();
+	</script>
+</body>
+</html>

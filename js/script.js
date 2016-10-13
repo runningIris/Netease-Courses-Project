@@ -15,96 +15,103 @@ function inform(){
 
 
 //登录及关注界面
-function login(){
+function follow(){
 	//登录弹窗的HTML结构
-	
-	var loginStr = '<div class="m-login">\
-			<div class="wraper"> \
-				<div class="content"> \
-					<h4>登录网易云课堂</h4> \
-					<input class="user" type="text" placeholder="账号"> \
-					<input class="password" type="password" placeholder="密码"> \
-					<input class="submit" type="submit" value="登录"> \
-				</div> \
-				<span class="close-icon">×</span> \
-			</div> \
-		</div>'
-
-	var logoutStr = '<div class="logout"> \
-						<div class="check-icon"></div> 已关注 | <span class="cancel">取消</span> \
-					</div>'
-
-	//登录弹窗节点
-	var loginNode = html2node(loginStr);
-	//弹窗关闭节点
-	var hideBtn = $(loginNode,'.m-login .close-icon');
-	//弹窗提交节点
-	var submitBtn = $(loginNode, '.m-login .submit');
-
-	//已登录节点
-	var logoutNode = html2node(logoutStr);
-	var logoutBtn = $(logoutNode, '.cancel');
-
-	//关注节点
-	var showBtn = $('.m-nav .login');
-	//导航粉丝数节点
-	var fans = $('.fans .num');
-	//初始化粉丝数
-	var fans_num = 45;
-	fans.innerHTML = fans_num;
-
-	function show(){
-		document.body.appendChild(loginNode);
+	var nodes = {
+		follow: html2node('<div class="follow"></div>'),
+		unfollow: html2node('<div class="unfollow"> \
+										<div class="check-icon"></div> 已关注 | <span class="cancel">取消</span> \
+									</div>'),
+		modal:html2node('<div class="m-login">\
+									<div class="wraper"> \
+										<div class="content"> \
+											<h4>登录网易云课堂</h4> \
+											<input class="user" type="text" placeholder="账号"> \
+											<input class="password" type="password" placeholder="密码"> \
+											<input class="submit" type="submit" value="登录"> \
+										</div> \
+										<span class="close-icon">×</span> \
+									</div> \
+								</div>'),
+		container: $('.m-follow')
 	}
-	function hide(){
-		document.body.removeChild(loginNode);
-	}
+	var events = {
+		follow: function(){
+			setFollowCookie();
+			container.removeChild(nodes.follow);
+			container.appendChild(nodes.unfollow);
+		},
+		unfollow: function(){
+			console.log('unfollowEvent');
+		},
+		submit: function(){
+			var userName = hex_md5($(nodes.modal, '.user').value),
+				password = hex_md5($(nodes.modal, '.password').value);
 
-	
-	
-	function submit(){
-		//预设的账号登录
-		// var test_user = 'Mary';
-		// var test_password = '123456';
-
-		var user = $(loginNode,'.user').value;
-		var password = $(loginNode,'.password').value;
-		checkInfo();
-		//登录成功后关闭弹窗、粉丝数+1、移除关注node、添加已关注node
-		// if(user == test_user && password == test_password){
-		// 	hide();
-		// 	fans.innerHTML = parseInt(fans.innerHTML) + 1;
-		// 	showBtn.parentNode.removeChild(showBtn);
-		// 	//插入注销
-		// 	$('.m-nav .container').insertBefore(logoutNode, $('.m-nav .fans'))
-		// }
-
-		function checkInfo(){
-		var data = {
-			url: 'http://study.163.com /webDev/login.htm?userName=1&password=2',
-			async: true,
-			success: function(data){
-				console.log(data);
+			var data = {
+				// url: 'http://study.163.com/webDev/login.htm?userName=studyOnline&password=study.163.com',
+				url: 'http://study.163.com/webDev/login.htm?userName=' + userName + '&password=' + password,
+				async: true,
+				success: function(data){
+					if(data == 1){
+						setCookie('loginSuc', 'true', 18000);
+						nodes.modal.parentNode.removeChild(nodes.modal);
+					} else{
+						alert('您的用户名和密码不匹配。')
+					}
 				}
 			}
-		
-		getAjax(data);
-		}	
+			getAjax(data);
+
+		},
+		login: function(){
+			document.body.appendChild(nodes.modal);
+			$(nodes.modal, '.submit').onclick = events.submit;
+		},
+		close: function(){
+			nodes.modal.parentNode.removeChild(nodes.modal);
+		}
 
 	}
 
+	function setFollowCookie(){
+		var data = {
+			url: 'http://study.163.com/webDev/attention.htm',
+			async: true,
+			success: function(data){
+				if(data == 1){
+					setCookie('followSuc', 'true', 18000);
+				}
+			}
+		}
+		getAjax(data);
+	}
+	function setLoginCookie(){
+		setCookie('loginSuc', 'true', 18000);
 
-	
-	function logout(){
-		//插入关注节点
-		$('.m-nav .container').insertBefore(showBtn, $('.m-nav .fans'))
-		logoutNode.parentNode.removeChild(logoutNode);
-	} 
+	}
 
-	showBtn.addEventListener('click', show);
-	hideBtn.addEventListener('click', hide);
-	submitBtn.addEventListener('click', submit);
-	logoutBtn.addEventListener('click', logout);
+	function defaultEvent(){   // X 点击关闭登录框
+		$(nodes.modal, '.close-icon').addEventListener('click', events.close);
+
+	}
+	function main(){
+		defaultEvent();
+		var loginSuc = getCookie('loginSuc');
+		var followSuc = getCookie('followSuc');
+		if(!!loginSuc && !! followSuc){ //已登录 && 已关注			
+			nodes.container.appendChild(nodes.unfollow);
+		} else {						
+			nodes.container.appendChild(nodes.follow);
+			if(!!loginSuc && !followSuc){  // 已登录 && 未关注
+				nodes.follow.onclick = events.follow;
+			} else {      //未登录 && 未关注
+				nodes.follow.onclick = events.login;
+			}
+		}
+
+	}
+	main();
 }
 
 
@@ -382,7 +389,7 @@ function loadVideo(){
 							<video src="http://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4" controls="controls"></video>\
 						</div>\
 					</div>\
-				</div>"'
+				</div>'
 	var container = html2node(str);
 	var trigger = $('.m-institudes .video');
 	function showVideo(){
@@ -396,4 +403,3 @@ function loadVideo(){
 	trigger.addEventListener('click', showVideo);
 	closer.addEventListener('click', closeVideo);
 }
-

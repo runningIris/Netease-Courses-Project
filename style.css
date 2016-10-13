@@ -72,7 +72,7 @@ a,a:hover{color:#333;}
 	float: left;
 	margin-left: 20px;
 }
-.m-nav .login{
+.m-nav .follow{
 	height: 22px;
 	width: 54px;
 	background-image: url('./images/sprite.png');
@@ -80,10 +80,10 @@ a,a:hover{color:#333;}
 	float: left;
 	margin-left: 30px;
 }
-.m-nav .login:hover{
+.m-nav .follow:hover{
 	background-position: -83px -41px;
 }
-.m-nav .logout{
+.m-nav .unfollow{
 	line-height: 22px;
 	width: 95px;
 	margin-left: 30px;
@@ -92,7 +92,7 @@ a,a:hover{color:#333;}
 	/*display: inline-block;*/
 	float: left;
 }
-.m-nav .logout:hover{
+.m-nav .unfollow:hover{
 	background-color: #ffffff;
 }
 .m-nav .check-icon{
