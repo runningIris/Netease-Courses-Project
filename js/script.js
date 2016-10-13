@@ -17,6 +17,11 @@ function inform(){
 //登录及关注界面
 function follow(){
 	//登录弹窗的HTML结构
+	// var loginSuc = sessionStorage['loginSuc'];
+	// console.log('login: ', loginSuc);
+	// var followSuc = sessionStorage['followSuc'];
+	// console.log('follow:', followSuc);
+
 	var nodes = {
 		follow: html2node('<div class="follow"></div>'),
 		unfollow: html2node('<div class="unfollow"> \
@@ -37,25 +42,39 @@ function follow(){
 	}
 	var events = {
 		follow: function(){
-			setFollowCookie();
-			container.removeChild(nodes.follow);
-			container.appendChild(nodes.unfollow);
+			if(sessionStorage['loginSuc']){
+				$('.fans .num').innerText = parseInt($('.fans .num').innerText) + 1;
+				setFollowCookie();
+				nodes.container.removeChild(nodes.follow);
+				nodes.container.appendChild(nodes.unfollow);
+				console.log(loginSuc,followSuc)
+				sessionStorage['followSuc'] = true;
+			} else{
+				//显示登录节点，监听submit
+				document.body.appendChild(nodes.modal);
+
+			}
 		},
 		unfollow: function(){
-			console.log('unfollowEvent');
+			nodes.container.removeChild(nodes.unfollow);
+			nodes.container.appendChild(nodes.follow);
+			sessionStorage['followSuc'] = false;
+			$('.fans .num').innerText = parseInt($('.fans .num').innerText) - 1;
 		},
 		submit: function(){
 			var userName = hex_md5($(nodes.modal, '.user').value),
 				password = hex_md5($(nodes.modal, '.password').value);
-
+			console.log(userName, password);
 			var data = {
 				// url: 'http://study.163.com/webDev/login.htm?userName=studyOnline&password=study.163.com',
 				url: 'http://study.163.com/webDev/login.htm?userName=' + userName + '&password=' + password,
 				async: true,
 				success: function(data){
 					if(data == 1){
-						setCookie('loginSuc', 'true', 18000);
+						sessionStorage['loginSuc'] = true;
 						nodes.modal.parentNode.removeChild(nodes.modal);
+						nodes.follow.onclick = events.follow;
+
 					} else{
 						alert('您的用户名和密码不匹配。')
 					}
@@ -63,10 +82,6 @@ function follow(){
 			}
 			getAjax(data);
 
-		},
-		login: function(){
-			document.body.appendChild(nodes.modal);
-			$(nodes.modal, '.submit').onclick = events.submit;
 		},
 		close: function(){
 			nodes.modal.parentNode.removeChild(nodes.modal);
@@ -80,35 +95,22 @@ function follow(){
 			async: true,
 			success: function(data){
 				if(data == 1){
+					sessionStorage['followSuc'] = 'true';
 					setCookie('followSuc', 'true', 18000);
+					console.log(data);
 				}
 			}
 		}
 		getAjax(data);
 	}
-	function setLoginCookie(){
-		setCookie('loginSuc', 'true', 18000);
 
-	}
-
-	function defaultEvent(){   // X 点击关闭登录框
-		$(nodes.modal, '.close-icon').addEventListener('click', events.close);
-
-	}
 	function main(){
-		defaultEvent();
-		var loginSuc = getCookie('loginSuc');
-		var followSuc = getCookie('followSuc');
-		if(!!loginSuc && !! followSuc){ //已登录 && 已关注			
-			nodes.container.appendChild(nodes.unfollow);
-		} else {						
-			nodes.container.appendChild(nodes.follow);
-			if(!!loginSuc && !followSuc){  // 已登录 && 未关注
-				nodes.follow.onclick = events.follow;
-			} else {      //未登录 && 未关注
-				nodes.follow.onclick = events.login;
-			}
-		}
+		$('.fans .num').innerText = 45;
+		nodes.container.appendChild(nodes.follow);
+		$(nodes.modal, '.close-icon').addEventListener('click', events.close);
+		$(nodes.unfollow, '.cancel').addEventListener('click', events.unfollow);
+		$(nodes.modal, '.submit').onclick = events.submit;
+		nodes.follow.addEventListener('click', events.follow);		
 
 	}
 	main();
