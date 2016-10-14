@@ -382,7 +382,7 @@ function loadVideo(){
 						<div class="content">\
 							<span class="close">×</span>\
 							<h4>请观看下面的视频</h4>\
-							<video src="https://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4" controls="controls"></video>\
+							<video src="http://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4" controls="controls"></video>\
 						</div>\
 					</div>\
 				</div>'
