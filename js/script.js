@@ -129,7 +129,7 @@ function banner(){
 		this.changeSlide();
 	}
 	Banner.prototype.setImg = function(){
-		this.img.src = this.images[this.index];
+		this.img.src = 'https' + this.images[this.index].slice(4);
 		for(var i = 0; i<this.navs.length; i++){
 			this.navs[i].style.backgroundColor='#fff';
 		}
@@ -239,7 +239,7 @@ function loadCourses(){
 			window.totalPageCount = data['totalPage'];
 			for(var i = 0; i < data.list.length; i++){
 				var course = window.courses[i].children[0];
-				course.children[0].src = data.list[i]['middlePhotoUrl'];
+				course.children[0].src = 'https' + data.list[i]['middlePhotoUrl'].slice(4);
 				for(var j = 1; j < 5; j++){
 					course.children[j].innerText = data.list[i][course.children[j].className];
 				}
@@ -364,7 +364,7 @@ function loadHotCourses(){
 					var img = hotCourses[i].children[0];
 					var name = hotCourses[i].children[1];
 					var learnerCount = hotCourses[i].children[2];
-					img.src = data[i+flag]['smallPhotoUrl'];
+					img.src = 'https' + data[i+flag]['smallPhotoUrl'].slice(4);
 					name.innerText = data[i+flag]['name'];
 					learnerCount.innerText = data[i+flag]['learnerCount'];
 				}
@@ -381,7 +381,7 @@ function loadVideo(){
 						<div class="content">\
 							<span class="close">×</span>\
 							<h4>请观看下面的视频</h4>\
-							<video src="mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4" controls="controls"></video>\
+							<video src="https://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4" controls="controls"></video>\
 						</div>\
 					</div>\
 				</div>'
