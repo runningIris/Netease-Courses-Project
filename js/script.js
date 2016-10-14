@@ -60,8 +60,8 @@ function follow(){
 				password = hex_md5($(nodes.modal, '.password').value);
 			console.log(userName, password);
 			var data = {
-				// url: 'study.163.com/webDev/login.htm?userName=studyOnline&password=study.163.com',
-				url: 'study.163.com/webDev/login.htm?userName=' + userName + '&password=' + password,
+				// url: 'https://study.163.com/webDev/login.htm?userName=studyOnline&password=study.163.com',
+				url: 'https://study.163.com/webDev/login.htm?userName=' + userName + '&password=' + password,
 				async: true,
 				success: function(data){
 					if(data == 1){
@@ -85,7 +85,7 @@ function follow(){
 
 	function setFollowSession(){
 		var data = {
-			url: 'study.163.com/webDev/attention.htm',
+			url: 'https://study.163.com/webDev/attention.htm',
 			async: true,
 			success: function(data){
 				if(data == 1){
@@ -233,7 +233,7 @@ function Course(){
 function loadCourses(){
 	
 	var data = {
-		url: 'study.163.com/webDev/couresByCategory.htm?pageNo='+ window.page + '&psize=20&type=' + window.type,
+		url: 'https://study.163.com/webDev/couresByCategory.htm?pageNo='+ window.page + '&psize=20&type=' + window.type,
 		async: true,
 		success: function(data){
 			window.totalPageCount = data['totalPage'];
@@ -357,7 +357,7 @@ function loadHotCourses(){
 	return function(){
 		flag = (flag + 1)%10
 		var data = {
-			url: 'study.163.com/webDev/hotcouresByCategory.htm',
+			url: 'https://study.163.com/webDev/hotcouresByCategory.htm',
 			async: true,
 			success: function(data){
 				for(var i = 0; i < 10; i++){
