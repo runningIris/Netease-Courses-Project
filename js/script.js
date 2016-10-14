@@ -129,7 +129,7 @@ function banner(){
 		this.changeSlide();
 	}
 	Banner.prototype.setImg = function(){
-		this.img.src = 'https' + this.images[this.index].slice(4);
+		this.img.src = this.images[this.index];
 		for(var i = 0; i<this.navs.length; i++){
 			this.navs[i].style.backgroundColor='#fff';
 		}
@@ -240,7 +240,7 @@ function loadCourses(){
 			for(var i = 0; i < data.list.length; i++){
 				console.log(data.list[i])
 				var course = window.courses[i].children[0];
-				course.children[0].src = 'https' + data.list[i]['middlePhotoUrl'].slice(4);
+				course.children[0].src = data.list[i]['middlePhotoUrl'];
 				for(var j = 1; j < 5; j++){
 					course.children[j].innerText = data.list[i][course.children[j].className];
 				}
@@ -365,7 +365,7 @@ function loadHotCourses(){
 					var img = hotCourses[i].children[0];
 					var name = hotCourses[i].children[1];
 					var learnerCount = hotCourses[i].children[2];
-					img.src = 'https' + data[i+flag]['smallPhotoUrl'].slice(4);
+					img.src = data[i+flag]['smallPhotoUrl'];
 					name.innerText = data[i+flag]['name'];
 					learnerCount.innerText = data[i+flag]['learnerCount'];
 				}
