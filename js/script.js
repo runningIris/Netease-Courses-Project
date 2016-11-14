@@ -128,8 +128,38 @@ function banner(){
 		this.setImg();
 		this.changeSlide();
 	}
+	Banner.prototype.fadeout = function(){
+
+		var that = this;
+		return function(){
+			var opacity = getComputedStyle(that.img).opacity;
+			console.log(opacity);
+
+			if(opacity > 0){
+				that.img.style.opacity = opacity - 0.1;
+			} else{
+				that.img.src = that.images[that.index];
+				// clearInterval(window.fout);
+				that.fin = setInterval(that.fadein(), 1500);
+			}
+		}
+	}
+	Banner.prototype.fadein = function(){
+		var that = this;
+		return function(){
+			var opacity = getComputedStyle(that.img).opacity;
+			if(opacity < 0.9){
+				that.img.style.opacity = opacity + 0.1;
+			} else{
+				clearInterval(that.fin)
+			}
+		}
+	}
 	Banner.prototype.setImg = function(){
-		this.img.src = this.images[this.index];
+		
+		window.fout = setInterval(this.fadeout(), 1500);
+
+
 		for(var i = 0; i<this.navs.length; i++){
 			this.navs[i].style.backgroundColor='#fff';
 		}
@@ -157,6 +187,8 @@ function banner(){
 		for(var i=1; i<4; i++){
 			this.images[i] = './images/banner' + i + '.jpg';
 		}
+		this.img.src = this.images[1];
+		// console.log(getComputedStyle(this.img).opacity);
 	}
 
 	Banner.prototype.changeSlide = function(){
