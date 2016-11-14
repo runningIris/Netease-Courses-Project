@@ -167,8 +167,16 @@ function banner(){
 
 	var banner = new Banner();
 	banner.init();
-	setInterval(banner.nextSlide.bind(banner), 5000);
 
+	//setInterval, clearInterval
+	var interval = setInterval(banner.nextSlide.bind(banner), 3000);
+	console.log(interval);
+	banner.container.addEventListener("mouseover", function(){
+		clearInterval(interval);
+	});
+	banner.container.addEventListener('mouseout', function(){
+		interval = setInterval(banner.nextSlide.bind(banner), 3000);
+	})
 }
 
 //页面中部关于三个产品的介绍
